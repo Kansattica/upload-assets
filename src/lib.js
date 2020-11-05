@@ -27,6 +27,7 @@ async function run() {
     let paths = []
     for(let i = 0; i < assetPaths.length; i++) {
       let assetPath = assetPaths[i];
+	  console.log("Checking asset path: " + assetPath)
       if(assetPath.indexOf("*") > -1) {
         const files = glob.sync(assetPath)
           for (const file of files) {
