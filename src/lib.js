@@ -25,14 +25,13 @@ async function run() {
     }
 
     let paths = []
-	let options = {}
-	options.nodir = true;
     for(let i = 0; i < assetPaths.length; i++) {
       let assetPath = assetPaths[i];
       if(assetPath.indexOf("*") > -1) {
-        const files = glob.sync(assetPath, options)
+        const files = glob.sync(assetPath)
           for (const file of files) {
-            paths.push(file)
+			if (fs.lstatSync(file).isFile())
+				paths.push(file)
         }
       }else {
         paths.push(assetPath)
