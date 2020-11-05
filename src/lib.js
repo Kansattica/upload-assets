@@ -28,12 +28,11 @@ async function run() {
     for(let i = 0; i < assetPaths.length; i++) {
       let assetPath = assetPaths[i];
       if(assetPath.indexOf("*") > -1) {
-        const files = glob.sync(assetPath)
-          for (const file of files) {
-			if (fs.lstatSync(file).isFile())
-				paths.push(file)
+        const files = glob.sync(assetPath, {nodir: true})
+        for (const file of files) {
+          paths.push(file)
         }
-      }else {
+      } else {
         paths.push(assetPath)
       }
     }
