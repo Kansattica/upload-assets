@@ -30,10 +30,13 @@ async function run() {
       if(assetPath.indexOf("*") > -1) {
         const files = glob.sync(assetPath)
           for (const file of files) {
-			if (fs.lstatSync(file).isFile())
+			if (fs.lstatSync(file).isFile()) {
+				core.debug("Glob adding file: " + file)
 				paths.push(file)
+			}
         }
       }else {
+		core.debug("Non-glob adding file: " + file)
         paths.push(assetPath)
       }
     }
