@@ -29,20 +29,11 @@ async function run() {
       let assetPath = assetPaths[i];
 	  console.log("Checking asset path: " + assetPath)
       if(assetPath.indexOf("*") > -1) {
-        const files = glob.sync(assetPath)
-          for (const file of files) {
-			  console.log("Testing file: " + file)
-			if (fs.lstatSync(file).isFile()) {
-				console.log("Glob adding file: " + file)
-				paths.push(file)
-			}
-			else
-			{
-			  console.log("skipping directory: " + file)
-			}
+        const files = glob.sync(assetPath, {nodir: true})
+        for (const file of files) {
+          paths.push(file)
         }
-      }else {
-		console.log("Non-glob adding file: " + file)
+      } else {
         paths.push(assetPath)
       }
     }
