@@ -36,7 +36,7 @@ jobs:
           echo "testing" | tee artifacts/dir1/file{1..5} > /dev/null
           mkdir -p artifacts/dir2/
           echo "still testing" | tee artifacts/dir2/anotherfile{1..5} > /dev/null
-          echo "last test" | tee artifacts/lastfile{1..3} > /dev/null
+          echo "last test" | tee artifacts/lastfile{1..6} > /dev/null
           ls -R artifacts
           
       - name: Upload Artifacts
@@ -44,4 +44,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          asset_paths: '["artifacts/**/*"]'
+          asset_paths: '["artifacts/lastfile*"]'
